@@ -35,8 +35,16 @@ export default function App() {
     reset(); setPuzzle(undefined); setLoading(true); setError('');
     try {
       const response = await fetch('/api/puzzle', { signal: request.signal });
-      const data = await response.json();
-      if (!response.ok) throw new Error(data.error ?? 'Today’s puzzle is unavailable.');
+      const contentType = response.headers.get('content-type') ?? '';
+      const body = await response.text();
+      let data: Record<string, unknown> = {};
+      if (body && contentType.includes('application/json')) {
+        try { data = JSON.parse(body) as Record<string, unknown>; } catch { /* handled below */ }
+      }
+      if (!contentType.includes('application/json')) {
+        throw new Error(`Puzzle service returned an unexpected response (${response.status}).`);
+      }
+      if (!response.ok) throw new Error(typeof data.error === 'string' ? data.error : 'Today’s puzzle is unavailable.');
       if (!request.signal.aborted) setPuzzle(parsePuzzle(data));
     } catch (e) {
       if (!request.signal.aborted) setError(e instanceof Error ? e.message : 'Unable to load today’s puzzle.');
