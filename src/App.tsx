@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import { buildModel } from './solver';
 import { parsePuzzle, type Puzzle, type Snapshot } from './types';
 import { BeliefView, Board, Domino, FactorGraph, ResidualChart } from './visuals';
@@ -147,5 +148,6 @@ export default function App() {
       <span>by <a href="https://leungchristopher.com" target="_blank" rel="noreferrer">Chris Leung</a></span>
       <a href="https://leungchristopher.com/" target="_blank" rel="noreferrer">Writeup</a>
     </footer>
+    <Analytics />
   </main>;
 }
