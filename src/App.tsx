@@ -145,7 +145,7 @@ export default function App() {
     <footer>
       <span>Pips by <a href="https://www.nytimes.com/games/pips" target="_blank" rel="noreferrer">The New York Times</a></span>
       <span>by <a href="https://leungchristopher.com" target="_blank" rel="noreferrer">Chris Leung</a></span>
-      <a href="https://leungchristopher.substack.com/" target="_blank" rel="noreferrer">Writeup</a>
+      <a href="https://leungchristopher.com/" target="_blank" rel="noreferrer">Writeup</a>
     </footer>
   </main>;
 }
